@@ -1,0 +1,73 @@
+<!-- Note: Replace "your_package_name" with the actual package name of your app -->
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="hit"
+            type="com.api.apirectrofitmvvmroomdb.models.Hit" />
+        <variable
+            name="adapterClick"
+            type="com.api.apirectrofitmvvmroomdb.interfaces.AdapterClick" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:scaleType="centerCrop"
+            android:src="@{hit.largeImageURL}"
+            android:contentDescription="@string/todo" />
+
+        <ImageView
+            android:id="@+id/heartIcon"
+            android:layout_width="45dp"
+            android:layout_height="30dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:src="@drawable/unfilled"
+            android:contentDescription="@string/todo" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_below="@id/imageView"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="5dp"
+            >
+
+            <TextView
+                android:id="@+id/likesTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{`Likes: ` + hit.likes}"
+            android:textStyle="bold"
+            android:layout_marginEnd="8dp" />
+
+            <TextView
+                android:id="@+id/viewsTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{`Views: ` + hit.views}"
+            android:layout_marginEnd="8dp"
+            android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/commentsTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{`Comments: ` + hit.comments}"
+            android:textStyle="bold" />
+
+        </LinearLayout>
+    </RelativeLayout>
+</layout>
