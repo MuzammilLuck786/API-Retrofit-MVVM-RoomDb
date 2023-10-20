@@ -1,4 +1,4 @@
-package com.api.apirectrofitmvvmroomdb
+package com.api.apirectrofitmvvmroomdb.others
 
 import android.content.Context
 import android.net.ConnectivityManager

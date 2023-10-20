@@ -1,73 +1,89 @@
-<!-- Note: Replace "your_package_name" with the actual package name of your app -->
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="3dp">
 
-    <data>
-        <variable
-            name="hit"
-            type="com.api.apirectrofitmvvmroomdb.models.Hit" />
-        <variable
-            name="adapterClick"
-            type="com.api.apirectrofitmvvmroomdb.interfaces.AdapterClick" />
-    </data>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
+    <ProgressBar
+        android:id="@+id/pbImg"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="16dp">
+        android:progressTint="@color/teal_700"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/imageView"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:scaleType="centerCrop"
-            android:src="@{hit.largeImageURL}"
-            android:contentDescription="@string/todo" />
+    </ProgressBar>
 
-        <ImageView
-            android:id="@+id/heartIcon"
-            android:layout_width="45dp"
-            android:layout_height="30dp"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:src="@drawable/unfilled"
-            android:contentDescription="@string/todo" />
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
+        android:contentDescription="TODO"
+        android:scaleType="centerCrop"
+        android:src="@drawable/baseline_image_24"
+        android:background="@drawable/textview2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <LinearLayout
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_below="@id/imageView"
+        android:gravity="center"
+        android:layout_marginBottom="5dp"
+        android:orientation="horizontal"
+        android:background="@drawable/textview2"
+        android:padding="2dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.781"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView">
+
+
+        <TextView
+            android:id="@+id/likesTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_below="@id/imageView"
-            android:layout_marginStart="50dp"
-            android:layout_marginTop="5dp"
-            >
-
-            <TextView
-                android:id="@+id/likesTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@{`Likes: ` + hit.likes}"
+            android:layout_weight="1"
+            android:layout_marginStart="45dp"
+            android:drawableLeft="@drawable/baseline_favorite_24"
+            android:drawablePadding="10dp"
+            android:text="Likes: "
             android:textStyle="bold"
-            android:layout_marginEnd="8dp" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/viewsTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@{`Views: ` + hit.views}"
-            android:layout_marginEnd="8dp"
+        <TextView
+            android:id="@+id/commentsTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawableLeft="@drawable/baseline_comment_24"
+            android:drawablePadding="10dp"
+            android:text="Comments: "
             android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/commentsTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@{`Comments: ` + hit.comments}"
+        <TextView
+            android:id="@+id/viewsTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawableLeft="@drawable/baseline_remove_red_eye_24"
+            android:drawablePadding="10dp"
+            android:text="Views: "
             android:textStyle="bold" />
 
-        </LinearLayout>
-    </RelativeLayout>
-</layout>
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+

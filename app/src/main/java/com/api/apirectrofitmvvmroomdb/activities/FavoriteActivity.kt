@@ -1,53 +1,56 @@
-package com.api.apirectrofitmvvmroomdb
+package com.api.apirectrofitmvvmroomdb.activities
 
-import FavImagesAdapter
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.widget.Toast
-import androidx.lifecycle.Observer
+import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.api.apirectrofitmvvmroomdb.adapter.ImageAdapter
-import com.api.apirectrofitmvvmroomdb.interfaces.AdapterClick
+import com.api.apirectrofitmvvmroomdb.adapter.FavImagesAdapter
+import com.api.apirectrofitmvvmroomdb.others.ImageApplication
+import com.api.apirectrofitmvvmroomdb.databinding.ActivityFavoriteBinding
 import com.api.apirectrofitmvvmroomdb.models.FavouriteEntity
-import com.api.apirectrofitmvvmroomdb.models.Hit
 import com.api.apirectrofitmvvmroomdb.viewmodels.MainViewModel
 import com.api.apirectrofitmvvmroomdb.viewmodels.MainViewModelFactory
 import kotlinx.coroutines.*
 
 class FavoriteActivity : AppCompatActivity() {
 
-    private lateinit var recyclerView: RecyclerView
     private lateinit var mainViewModel: MainViewModel
     private lateinit var favImagesAdapter: FavImagesAdapter
+    private lateinit var binding:ActivityFavoriteBinding
 
     @OptIn(DelicateCoroutinesApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_favorite)
+        binding=ActivityFavoriteBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         val repository = (application as ImageApplication).repository
 
         mainViewModel = ViewModelProvider(this, MainViewModelFactory(repository))[MainViewModel::class.java]
 
-        recyclerView = findViewById(R.id.rvFavImage)
-        recyclerView.layoutManager = LinearLayoutManager(this)
+        binding.rvFavImage.layoutManager = LinearLayoutManager(this)
+
 
         favImagesAdapter = FavImagesAdapter(this,emptyList())
         mainViewModel.getFavList().observe(this) { List ->
-            recyclerView.adapter = favImagesAdapter
             favImagesAdapter.submitList(List)
+            binding.rvFavImage.adapter = favImagesAdapter
+            if (List.isEmpty()) {
+                binding.tvEmpty.visibility = View.VISIBLE
+
+            } else {
+                binding.tvEmpty.visibility=View.INVISIBLE
+                binding.rvFavImage.visibility = View.VISIBLE
+            }
         }
 
         favImagesAdapter.setOnFavouriteClickListner(object : FavImagesAdapter.FavBtnClickListner
         {
             override fun onFavBtnClick(item: FavouriteEntity) {
                 GlobalScope.launch {
-                    mainViewModel.deleteFav(item.favId)
+                    mainViewModel.deleteFav(item.id)
                 }
-
             }
         })
 

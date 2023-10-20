@@ -1,4 +1,4 @@
-package com.api.apirectrofitmvvmroomdb
+package com.api.apirectrofitmvvmroomdb.others
 
 import android.app.Application
 import com.api.apirectrofitmvvmroomdb.api.ImageService

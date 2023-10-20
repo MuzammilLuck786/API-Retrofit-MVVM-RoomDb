@@ -3,7 +3,7 @@ package com.api.apirectrofitmvvmroomdb.repository
 import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.api.apirectrofitmvvmroomdb.NetworkUtils
+import com.api.apirectrofitmvvmroomdb.others.NetworkUtils
 import com.api.apirectrofitmvvmroomdb.api.ImageService
 import com.api.apirectrofitmvvmroomdb.models.FavouriteEntity
 import com.api.apirectrofitmvvmroomdb.models.Hit
@@ -22,21 +22,20 @@ class Repository(
     val images: LiveData<ImagesLists>
         get() = imagesLiveData
 
-    suspend fun getImages(page: Int) {
+    suspend fun getImages(category:String) {
         imageDatabase=ImageDatabase.getInstance(applicationContext)
         if (NetworkUtils.isNetworkAvailable(applicationContext)) {
-            val result = imageService.getImages(page)
+            val result = imageService.getImages(category)
             if (result.isSuccessful) {
                 result.body()?.let {
                     imageDatabase.imageDao().deleteAllImages()
-                    imageDatabase.imageDao().addImages(it.hits)
+                    imageDatabase.imageDao().addImages(result.body()!!.hits)
                     imagesLiveData.postValue(result.body())
                 }
-
             }
         } else {
             val images = imageDatabase.imageDao().getImageList()
-            val imgList = ImagesLists(images, 1, 1)
+            val imgList = ImagesLists(images , 1, 1)
             imagesLiveData.postValue(imgList)
         }
     }
@@ -53,12 +52,13 @@ class Repository(
         imageDatabase.imageDao().deleteFav(favId)
     }
 
+    suspend fun delFromImg(id: Int){
+        imageDatabase.imageDao().delFromImages(id)
+    }
+
     suspend fun getFavoriteByHitId(id:Int): FavouriteEntity? {
         return imageDatabase.imageDao().getFavById(id)
     }
-
-
-
 
     }
 

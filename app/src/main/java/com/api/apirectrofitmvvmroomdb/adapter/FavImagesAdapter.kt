@@ -1,3 +1,4 @@
+package com.api.apirectrofitmvvmroomdb.adapter
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -5,11 +6,8 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.api.apirectrofitmvvmroomdb.FavoriteActivity
 import com.api.apirectrofitmvvmroomdb.R
-import com.api.apirectrofitmvvmroomdb.interfaces.AdapterClick
 import com.api.apirectrofitmvvmroomdb.models.FavouriteEntity
-import com.api.apirectrofitmvvmroomdb.models.Hit
 import com.bumptech.glide.Glide
 
 class FavImagesAdapter(
@@ -18,7 +16,6 @@ class FavImagesAdapter(
 ) : RecyclerView.Adapter<FavImagesAdapter.FavImgViewHolder>() {
 
     private var favBtnListner: FavImagesAdapter.FavBtnClickListner ?= null
-
 
     fun setOnFavouriteClickListner(listner: FavBtnClickListner){
         favBtnListner = listner
@@ -41,9 +38,9 @@ class FavImagesAdapter(
             .load(currentHit.largeImageURL)
             .into(holder.imageView)
 
-        holder.likesTextView.text = "Likes: ${currentHit.likes}"
-        holder.viewsTextView.text = "Views: ${currentHit.views}"
-        holder.commentsTextView.text = "Comments: ${currentHit.comments}"
+//        holder.likesTextView.text = "${currentHit.likes}"
+//        holder.viewsTextView.text = "${currentHit.views}"
+//        holder.commentsTextView.text = "${currentHit.comments}"
 
         holder.heartIcon.setOnClickListener {
             favBtnListner?.onFavBtnClick(currentHit)
@@ -57,9 +54,9 @@ class FavImagesAdapter(
 
     inner class FavImgViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val imageView: ImageView = itemView.findViewById(R.id.imageView)
-        val likesTextView: TextView = itemView.findViewById(R.id.likesTextView)
-        val viewsTextView: TextView = itemView.findViewById(R.id.viewsTextView)
-        val commentsTextView: TextView = itemView.findViewById(R.id.commentsTextView)
+//        val likesTextView: TextView = itemView.findViewById(R.id.likesTv)
+//        val viewsTextView: TextView = itemView.findViewById(R.id.viewsTv)
+//        val commentsTextView: TextView = itemView.findViewById(R.id.commentsTv)
         val heartIcon:ImageView=itemView.findViewById(R.id.heartIcon)
 
     }

@@ -10,5 +10,9 @@ data class Hit(
     val largeImageURL: String,
     val likes: Int,
     val views: Int,
-    val id:Int
-)
+    val id:Int,
+    val tags:String,
+    val type:String,
+    val downloads:Int
+
+):java.io.Serializable
