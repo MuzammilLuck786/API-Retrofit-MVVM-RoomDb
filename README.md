@@ -3,7 +3,6 @@
 This Android app allows users to browse and interact with a collection of images fetched from the Pixabay API. Users can view images in various categories such as backgrounds, fashion, nature, science, education, feelings, health, computer, food, and sports. They can also access detailed information about each image including likes, comments, and views.
 
 ## Features
-
 - Fetches images from Pixabay API using Retrofit
 - Implements the MVVM (Model-View-ViewModel) architecture for clean and organized code
 - Utilizes RoomDb for local data storage and retrieval
